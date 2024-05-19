@@ -58,15 +58,14 @@ void RenderArea::drawEndPos(QPainter &painter)
  * @brief Draw all the rectangular obstacles.
  * @param painter
  */
-void RenderArea::drawObstacles(QPainter &painter)
+void RenderArea::drawObstacles(QPainter &painter) const
 {
     painter.save();
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::black);
     painter.setBrush(QBrush(Qt::black));
     pair<Vector2f, Vector2f> obstacle;
-    for(int i = 0; i < (int)rrt->obstacles->obstacles.size(); i++) {
-        obstacle = rrt->obstacles->obstacles[i];
+    for(const auto & obstacle : rrt->obstacles->obstacles) {
         QPoint topLeft(obstacle.first.x() + BOT_CLEARANCE, obstacle.first.y() + BOT_CLEARANCE);
         QPoint bottomRight(obstacle.second.x() - BOT_CLEARANCE, obstacle.second.y() - BOT_CLEARANCE);
         QRect rect(topLeft, bottomRight);
@@ -86,12 +85,12 @@ void RenderArea::drawNodes(QPainter &painter)
     painter.setPen(Qt::black);
     painter.setBrush(QBrush(Qt::black));
     Vector2f pos;
-    for(int i = 0; i < (int)rrt->nodes.size(); i++) {
-        for(int j = 0; j < (int)rrt->nodes[i]->children.size(); j++) {
-            pos = rrt->nodes[i]->children[j]->position;
+    for(auto & node : rrt->nodes) {
+        for(int j = 0; j < (int)node->children.size(); j++) {
+            pos = node->children[j]->position;
             painter.drawEllipse(pos.x()-1.5, pos.y()-1.5, 3, 3);
         }
-        pos = rrt->nodes[i]->position;
+        pos = node->position;
         painter.drawEllipse(pos.x() - NODE_RADIUS, pos.y() - NODE_RADIUS, 2 * NODE_RADIUS, 2 * NODE_RADIUS);
     }
     painter.setPen(Qt::red);

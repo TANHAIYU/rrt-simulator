@@ -2,9 +2,9 @@
 #define RRT_H
 
 #include "obstacles.h"
-#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 using namespace Eigen;
@@ -20,10 +20,10 @@ class RRT
 public:
     RRT();
     void initialize();
-    Node* getRandomNode();
+    static Node* getRandomNode();
     Node* nearest(Vector2f point);
-    int distance(Vector2f &p, Vector2f &q);
-    Vector2f newConfig(Node *q, Node *qNearest);
+    static int distance(Vector2f &p, Vector2f &q);
+    Vector2f newConfig(Node *q, Node *qNearest) const;
     void add(Node *qNearest, Node *qNew);
     bool reached();
     void setStepSize(int step);
@@ -34,6 +34,11 @@ public:
     vector<Node *> path;
     Node *root, *lastNode;
     Vector2f startPos, endPos;
+
+    void setStartPos(const Vector2f &startPos);
+
+    void setEndPos(const Vector2f &endPos);
+
     int max_iter;
     int step_size;
 };

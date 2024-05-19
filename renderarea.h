@@ -15,7 +15,7 @@ class RenderArea : public QWidget
 {
     Q_OBJECT
 public:
-    RenderArea(QWidget *parent = 0);
+    explicit RenderArea(QWidget *parent = nullptr);
     RRT *rrt;
 protected:
     void paintEvent(QPaintEvent *event);
@@ -25,7 +25,7 @@ protected:
     void drawField(QPainter &event);
     void drawStartPos(QPainter &event);
     void drawEndPos(QPainter &event);
-    void drawObstacles(QPainter &event);
+    void drawObstacles(QPainter &event) const;
     void drawNodes(QPainter &event);
 private:
     bool scribbling;

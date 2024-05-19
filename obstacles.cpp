@@ -43,13 +43,13 @@ bool Obstacles::isSegmentInObstacle(Vector2f &p1, Vector2f &p2)
 {
     QLineF lineSegment(p1.x(), p1.y(), p2.x(), p2.y());
     QPointF *intersectPt = new QPointF;
-    for(int i = 0; i < (int)obstacles.size(); i++) {
-        float length = obstacles[i].second.x() - obstacles[i].first.x();
-        float breadth = obstacles[i].second.y() - obstacles[i].first.y();
-        QLineF lseg1(obstacles[i].first.x(), obstacles[i].first.y(), obstacles[i].first.x() + length, obstacles[i].first.y());
-        QLineF lseg2(obstacles[i].first.x(), obstacles[i].first.y(), obstacles[i].first.x(), obstacles[i].first.y() + breadth);
-        QLineF lseg3(obstacles[i].second.x(), obstacles[i].second.y(), obstacles[i].second.x(), obstacles[i].second.y() - breadth);
-        QLineF lseg4(obstacles[i].second.x(), obstacles[i].second.y(), obstacles[i].second.x() - length, obstacles[i].second.y());
+    for(auto & obstacle : obstacles) {
+        float length = obstacle.second.x() - obstacle.first.x();
+        float breadth = obstacle.second.y() - obstacle.first.y();
+        QLineF lseg1(obstacle.first.x(), obstacle.first.y(), obstacle.first.x() + length, obstacle.first.y());
+        QLineF lseg2(obstacle.first.x(), obstacle.first.y(), obstacle.first.x(), obstacle.first.y() + breadth);
+        QLineF lseg3(obstacle.second.x(), obstacle.second.y(), obstacle.second.x(), obstacle.second.y() - breadth);
+        QLineF lseg4(obstacle.second.x(), obstacle.second.y(), obstacle.second.x() - length, obstacle.second.y());
         QLineF::IntersectType x1 = lineSegment.intersect(lseg1, intersectPt);
         QLineF::IntersectType x2 = lineSegment.intersect(lseg2, intersectPt);
         QLineF::IntersectType x3 = lineSegment.intersect(lseg3, intersectPt);

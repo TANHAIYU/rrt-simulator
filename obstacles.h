@@ -4,8 +4,8 @@
 #include <QDebug>
 #include <QLine>
 #include <vector>
-#include <eigen3/Eigen/Dense>
-#include <assert.h>
+#include "Eigen/Dense"
+#include <cassert>
 #include "constants.h"
 
 using namespace Eigen;

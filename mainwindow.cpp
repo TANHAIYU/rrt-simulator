@@ -1,3 +1,4 @@
+#include <iostream>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -25,6 +26,8 @@ void MainWindow::on_startButton_clicked()
     // get step size and max iterations from GUI.
     rrt->setMaxIterations(ui->maxIterations->text().toInt());
     rrt->setStepSize(ui->stepSize->text().toInt());
+//    rrt->setStartPos();
+//    rrt->setEndPos()
 
     assert(rrt->step_size > 0);
     assert(rrt->max_iter > 0);
@@ -52,14 +55,13 @@ void MainWindow::on_startButton_clicked()
     if (rrt->reached()) {
         q = rrt->lastNode;
     }
-    else
-    {
+    else {
         // if not reached yet, then shortestPath will start from the closest node to end point.
         q = rrt->nearest(rrt->endPos);
         ui->statusBox->setText(tr("Exceeded max iterations!"));
     }
-    // generate shortest path to destination.
-    while (q != NULL) {
+    // generate the shortest path to destination.
+    while (q != nullptr) {
         rrt->path.push_back(q);
         q = q->parent;
     }

@@ -22,7 +22,7 @@ RRT::RRT()
 void RRT::initialize()
 {
     root = new Node;
-    root->parent = NULL;
+    root->parent = nullptr;
     root->position = startPos;
     lastNode = root;
     nodes.push_back(root);
@@ -41,7 +41,7 @@ Node* RRT::getRandomNode()
         ret->position = point;
         return ret;
     }
-    return NULL;
+    return nullptr;
 }
 
 /**
@@ -64,12 +64,12 @@ int RRT::distance(Vector2f &p, Vector2f &q)
 Node* RRT::nearest(Vector2f point)
 {
     float minDist = 1e9;
-    Node *closest = NULL;
-    for(int i = 0; i < (int)nodes.size(); i++) {
-        float dist = distance(point, nodes[i]->position);
+    Node *closest = nullptr;
+    for(auto & node : nodes) {
+        float dist = distance(point, node->position);
         if (dist < minDist) {
             minDist = dist;
-            closest = nodes[i];
+            closest = node;
         }
     }
     return closest;
@@ -81,8 +81,7 @@ Node* RRT::nearest(Vector2f point)
  * @param qNearest
  * @return
  */
-Vector2f RRT::newConfig(Node *q, Node *qNearest)
-{
+Vector2f RRT::newConfig(Node *q, Node *qNearest) const {
     Vector2f to = q->position;
     Vector2f from = qNearest->position;
     Vector2f intermediate = to - from;
@@ -131,8 +130,16 @@ void RRT::setMaxIterations(int iter)
  */
 void RRT::deleteNodes(Node *root)
 {
-    for(int i = 0; i < (int)root->children.size(); i++) {
-        deleteNodes(root->children[i]);
+    for(auto & i : root->children) {
+        deleteNodes(i);
     }
     delete root;
+}
+
+void RRT::setStartPos(const Vector2f &startPos) {
+    RRT::startPos = startPos;
+}
+
+void RRT::setEndPos(const Vector2f &endPos) {
+    RRT::endPos = endPos;
 }

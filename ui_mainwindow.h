@@ -88,7 +88,7 @@ public:
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QMainWindow *MainWindow) const
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "RRT Simulator", Q_NULLPTR));
         startButton->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
