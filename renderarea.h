@@ -22,6 +22,7 @@ protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
     void drawField(QPainter &event);
     void drawStartPos(QPainter &event);
     void drawEndPos(QPainter &event);

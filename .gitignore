@@ -81,3 +81,7 @@ cmake-build-debug/.cmake/api/v1/query/toolchains-v1
 cmake-build-debug/.cmake/api/v1/query/codemodel-v2
 cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1
 cmake-build-debug/.cmake/api/v1/query/cache-v2
+cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-7c624dab9c9edc5941d1.json
+cmake-build-debug/.cmake/api/v1/reply/index-2024-05-19T07-11-52-0852.json
+cmake-build-debug/.cmake/api/v1/reply/target-rrt-test-Debug-18decd0d7c930c932387.json
+cmake-build-debug/.cmake/api/v1/reply/index-2024-05-19T07-48-38-0460.json

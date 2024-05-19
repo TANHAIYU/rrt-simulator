@@ -33,7 +33,7 @@ public:
     vector<Node *> nodes;
     vector<Node *> path;
     Node *root, *lastNode;
-    Vector2f startPos, endPos;
+    Vector2f start_pos, end_pos;
 
     void setStartPos(const Vector2f &startPos);
 

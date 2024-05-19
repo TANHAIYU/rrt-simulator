@@ -31,6 +31,7 @@ public:
     RenderArea *renderArea;
     QPushButton *startButton;
     QPushButton *resetButton;
+    QPushButton *resetPosButton;
     QTextBrowser *textBrowser;
     QLabel *stepSizeLabel;
     QLineEdit *stepSize;
@@ -52,9 +53,12 @@ public:
         startButton = new QPushButton(centralWidget);
         startButton->setObjectName(QStringLiteral("startButton"));
         startButton->setGeometry(QRect(400, 0, 99, 30));
+        resetPosButton = new QPushButton(centralWidget);
+        resetPosButton->setObjectName(QStringLiteral("resetPosButton"));
+        resetPosButton->setGeometry(QRect(400, 25, 99, 27));
         resetButton = new QPushButton(centralWidget);
         resetButton->setObjectName(QStringLiteral("resetButton"));
-        resetButton->setGeometry(QRect(400, 30, 99, 27));
+        resetButton->setGeometry(QRect(400, 50, 99, 27));
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
         textBrowser->setGeometry(QRect(400, 300, 100, 100));
@@ -93,6 +97,7 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "RRT Simulator", Q_NULLPTR));
         startButton->setText(QApplication::translate("MainWindow", "Start", Q_NULLPTR));
         resetButton->setText(QApplication::translate("MainWindow", "Reset", Q_NULLPTR));
+        resetPosButton->setText(QApplication::translate("MainWindow", "ResetPos", Q_NULLPTR));
         textBrowser->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

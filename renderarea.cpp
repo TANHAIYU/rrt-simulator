@@ -36,7 +36,7 @@ void RenderArea::drawStartPos(QPainter &painter)
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::black);
     painter.setBrush(QBrush(Qt::red));
-    painter.drawEllipse(this->x() + START_POS_X - BOT_RADIUS, this->y() + START_POS_Y - BOT_RADIUS, 2 * BOT_RADIUS, 2 * BOT_RADIUS);
+    painter.drawEllipse(rrt->start_pos.x() - BOT_RADIUS, rrt->start_pos.y() - BOT_RADIUS, 2 * BOT_RADIUS, 2 * BOT_RADIUS);
     painter.restore();
 }
 
@@ -50,7 +50,7 @@ void RenderArea::drawEndPos(QPainter &painter)
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(Qt::black);
     painter.setBrush(QBrush(Qt::blue));
-    painter.drawEllipse(END_POS_X - BOT_RADIUS, END_POS_Y - BOT_RADIUS, 2 * BOT_RADIUS, 2 * BOT_RADIUS);
+    painter.drawEllipse(rrt->end_pos.x() - BOT_RADIUS, rrt->end_pos.y() - BOT_RADIUS, 2 * BOT_RADIUS, 2 * BOT_RADIUS);
     painter.restore();
 }
 
@@ -86,8 +86,8 @@ void RenderArea::drawNodes(QPainter &painter)
     painter.setBrush(QBrush(Qt::black));
     Vector2f pos;
     for(auto & node : rrt->nodes) {
-        for(int j = 0; j < (int)node->children.size(); j++) {
-            pos = node->children[j]->position;
+        for(auto & j : node->children) {
+            pos = j->position;
             painter.drawEllipse(pos.x()-1.5, pos.y()-1.5, 3, 3);
         }
         pos = node->position;
@@ -136,5 +136,18 @@ void RenderArea::mouseReleaseEvent(QMouseEvent *event)
         rrt->obstacles->addObstacle(Vector2f(lastMouseClickedPoint.x(), lastMouseClickedPoint.y()), Vector2f(curPoint.x(), curPoint.y()));
         update();
         scribbling = false;
+    }
+}
+
+void RenderArea::mouseDoubleClickEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+        QPoint curPoint = event->pos();
+        rrt->setStartPos(Vector2f(curPoint.x(), curPoint.y()));
+        update();
+    }
+    if (event->button() == Qt::RightButton) {
+        QPoint curPoint = event->pos();
+        rrt->setEndPos(Vector2f(curPoint.x(), curPoint.y()));
+        update();
     }
 }

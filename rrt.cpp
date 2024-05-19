@@ -3,13 +3,13 @@
 RRT::RRT()
 {
     obstacles = new Obstacles;
-    startPos.x() = START_POS_X;
-    startPos.y() = START_POS_Y;
-    endPos.x() = END_POS_X;
-    endPos.y() = END_POS_Y;
+    start_pos.x() = START_POS_X;
+    start_pos.y() = START_POS_Y;
+    end_pos.x() = END_POS_X;
+    end_pos.y() = END_POS_Y;
     root = new Node;
-    root->parent = NULL;
-    root->position = startPos;
+    root->parent = nullptr;
+    root->position = start_pos;
     lastNode = root;
     nodes.push_back(root);
     step_size = 3;
@@ -23,7 +23,7 @@ void RRT::initialize()
 {
     root = new Node;
     root->parent = nullptr;
-    root->position = startPos;
+    root->position = start_pos;
     lastNode = root;
     nodes.push_back(root);
 }
@@ -109,7 +109,7 @@ void RRT::add(Node *qNearest, Node *qNew)
  */
 bool RRT::reached()
 {
-    if (distance(lastNode->position, endPos) < END_DIST_THRESHOLD)
+    if (distance(lastNode->position, end_pos) < END_DIST_THRESHOLD)
         return true;
     return false;
 }
@@ -137,9 +137,9 @@ void RRT::deleteNodes(Node *root)
 }
 
 void RRT::setStartPos(const Vector2f &startPos) {
-    RRT::startPos = startPos;
+    start_pos = startPos;
 }
 
 void RRT::setEndPos(const Vector2f &endPos) {
-    RRT::endPos = endPos;
+    end_pos = endPos;
 }
